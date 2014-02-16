@@ -1,11 +1,39 @@
-/*
-Author: Nikhil Saxena
-Date: May 5, 2013
-*/
+// ------------------------------------------
+// Customizable Level Backgrounds and Prompts
+// ------------------------------------------
+
+// Level Backgrounds
+String level1_bg = "";
+String level2_bg = "";
+String level3_bg = "";
+String level4_bg = "";
+String level5_bg = "";
+String level6_bg = "";
+String level7_bg = "";
+String level8_bg = "";
+String level9_bg = "";
+String level10_bg = "";
+
+// Level Stories
+String intro_story = "In this game, your goal is to avoid the falling blocks by moving your mouse. There are ten levels, and you advance to the next level by surviving for fifteen seconds. Just fifteen seconds, that's easy right? Well.. maybe not, and to help you out, we've given you some power-ups, which move horizontally across the screen. Move into a power-up, and you'll get a special ability: either you'll become smaller, the blocks will become smaller, or the blocks will fall more slowly.. all of which help you dodge them! If the power-up is glowing in random colors as it moves, you really want that one: that will make you invincible for a short period of time! And if the power-up is flickering black and white, you really really want it: it will give you an extra life! A few more things: if you get hit, you'll have to start that level over again, and if you  lose all your lives, you'll have to start ALL the way back from Level 1. Bummer! To help you some more though, once you finish a level, we'll give you an additional life! That's all the rules, let's play!";
+String level1_story = "Level 1";
+String level2_story = "Level 2";
+String level3_story = "Level 3";
+String level4_story = "Level 4";
+String level5_story = "Level 5";
+String level6_story = "Level 6";
+String level7_story = "Level 7";
+String level8_story = "Level 8";
+String level9_story = "Level 9";
+String level10_story = "Level 10: FINAL";
+String game_end_story = "Congratulations, you've completed the game! Play again!";
+String lost_all_lives_story = "Looks like you're out of lives! Play again!";
+
 
 // ------------------------------------------
 // Global Variables
 // ------------------------------------------
+
 // Canvas Parameters
 int canv_w = 700;
 int canv_h = 640;
@@ -25,33 +53,6 @@ float default_r = 20;
 float game_speed = 15; 
 float obstacle_height = 20;
 float obstacle_max_speed = 1;
-
-// Level Backgrounds
-String level1_bg = "img/background_stars.jpg";
-String level2_bg = "img/background_island.jpg";
-String level3_bg = "img/background_underwater.jpg";
-String level4_bg = "img/background_nemo.jpg";
-String level5_bg = "img/background_seattle.jpg";
-String level6_bg = "img/background_northernlights.jpg";
-String level7_bg = "img/background_solitude.jpg";
-String level8_bg = "img/background_lava.jpg";
-String level9_bg = "img/background_enemyterritory.jpg";
-String level10_bg = "img/background_castle.jpg";
-
-// Level Stories
-String intro_story = "In this game, your goal is to avoid the falling blocks by moving your mouse. There are ten levels, and you advance to the next level by surviving for fifteen seconds. Just fifteen seconds, that's easy right? Well.. maybe not, and to help you out, we've given you some power-ups, which move horizontally across the screen. Move into a power-up, and you'll get a special ability: either you'll become smaller, the blocks will become smaller, or the blocks will fall more slowly.. all of which help you dodge them! If the power-up is glowing in random colors as it moves, you really want that one: that will make you invincible for a short period of time! And if the power-up is flickering black and white, you really really want it: it will give you an extra life! A few more things: if you get hit, you'll have to start that level over again, and if you  lose all your lives, you'll have to start ALL the way back from Level 1. Bummer! To help you some more though, once you finish a level, we'll give you an additional life! That's all the rules, let's play!";
-String level1_story = "Level 1: Space";
-String level2_story = "Level 2: Island";
-String level3_story = "Level 3: Water";
-String level4_story = "Level 4: Fish";
-String level5_story = "Level 5: Seattle";
-String level6_story = "Level 6: Aurora";
-String level7_story = "Level 7: Fortress";
-String level8_story = "Level 8: Volcano";
-String level9_story = "Level 9: Ruins";
-String level10_story = "Level 10: FINAL";
-String game_end_story = "Congratulations, you've completed the game! Play again!";
-String lost_all_lives_story = "Looks like you're out of lives! Play again!";
 
 // Game States
 boolean collision_state = false; 
@@ -103,8 +104,15 @@ void finishSetup() {
 void draw() {
 	if (!level_ready) {return;}
 
-	// Background Image	
-	image(bg);	
+	// Load image if specified,
+	// else make black background
+	// try {
+	// 	image(bg);
+	// }
+	// catch {
+	// 	background(0);
+	// }
+	background(0);
 	
 	// Show Text
 	fill(text_r,text_g,text_b);
@@ -148,7 +156,7 @@ void draw() {
 			p1.r = random(255);
 			p1.g = random(255);
 			p1.b = random(255);
-		}	
+		}
 		power_timer = new Date();	
 		if (power_timer-power_start <= pu1.effect_length*1000) {
 			applyPower();			
@@ -283,7 +291,7 @@ void startLevel(int new_level) {
 
 	current_level = new_level; 	
 	switch (current_level) {
-		case 1: 
+		case 1:
 			bg = loadImage(level1_bg); 
 			setupObstacles(2);
 			levelMessage();
