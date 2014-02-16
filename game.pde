@@ -1,18 +1,6 @@
 // ------------------------------------------
-// Customizable Level Backgrounds and Prompts
+// Global Variables
 // ------------------------------------------
-
-// Level Backgrounds
-String level1_bg = "";
-String level2_bg = "";
-String level3_bg = "";
-String level4_bg = "";
-String level5_bg = "";
-String level6_bg = "";
-String level7_bg = "";
-String level8_bg = "";
-String level9_bg = "";
-String level10_bg = "";
 
 // Level Stories
 String intro_story = "In this game, your goal is to avoid the falling blocks by moving your mouse. There are ten levels, and you advance to the next level by surviving for fifteen seconds. Just fifteen seconds, that's easy right? Well.. maybe not, and to help you out, we've given you some power-ups, which move horizontally across the screen. Move into a power-up, and you'll get a special ability: either you'll become smaller, the blocks will become smaller, or the blocks will fall more slowly.. all of which help you dodge them! If the power-up is glowing in random colors as it moves, you really want that one: that will make you invincible for a short period of time! And if the power-up is flickering black and white, you really really want it: it will give you an extra life! A few more things: if you get hit, you'll have to start that level over again, and if you  lose all your lives, you'll have to start ALL the way back from Level 1. Bummer! To help you some more though, once you finish a level, we'll give you an additional life! That's all the rules, let's play!";
@@ -29,17 +17,12 @@ String level10_story = "Level 10: FINAL";
 String game_end_story = "Congratulations, you've completed the game! Play again!";
 String lost_all_lives_story = "Looks like you're out of lives! Play again!";
 
-
-// ------------------------------------------
-// Global Variables
-// ------------------------------------------
-
 // Canvas Parameters
 int canv_w = 700;
 int canv_h = 640;
 
-// Background
-PImage bg;
+// Background Color
+int bg_color = 0;
 
 // Text Box
 float text_r = 255;
@@ -58,7 +41,7 @@ float obstacle_max_speed = 1;
 boolean collision_state = false; 
 boolean power_state = false; 
 int current_level = 1;
-boolean lost_all_lives = false; 
+boolean lost_all_lives = false;
 
 // Level Timers
 boolean level_timer_is_on = false; 
@@ -104,19 +87,13 @@ void finishSetup() {
 void draw() {
 	if (!level_ready) {return;}
 
-	// Load image if specified,
-	// else make black background
-	// try {
-	// 	image(bg);
-	// }
-	// catch {
-	// 	background(0);
-	// }
-	background(0);
+	// Make background
+	background(bg_color);
 	
 	// Show Text
 	fill(text_r,text_g,text_b);
 	textSize(20);
+	text("Level: "+current_level,10,60)
 	text("Lives Left: "+lives_left,10,30);
 	level_time_remaining = level_complete_time - floor(((new Date()).getTime() - level_start_stamp)/1000);
 	text("Time Left: "+level_time_remaining,canv_w-150,30);
@@ -290,64 +267,14 @@ void startLevel(int new_level) {
 	if (power_state) {resetPower();}
 
 	current_level = new_level; 	
-	switch (current_level) {
-		case 1:
-			bg = loadImage(level1_bg); 
-			setupObstacles(2);
-			levelMessage();
-			break;
-		case 2: 
-			bg = loadImage(level2_bg);	
-			setupObstacles(3);
-			levelMessage();
-			break;
-		case 3:	
-			bg = loadImage(level3_bg); 
-			setupObstacles(4);
-			levelMessage();
-			break;
-		case 4:	
-			bg = loadImage(level4_bg); 
-			setupObstacles(5);
-			levelMessage();
-			break;
-		case 5:
-			bg = loadImage(level5_bg);
-			setupObstacles(6);
-			levelMessage();
-			break;
-		case 6: 
-			bg = loadImage(level6_bg); 
-			setupObstacles(7);
-			levelMessage();
-			break;
-		case 7: 
-			bg = loadImage(level7_bg);	
-			setupObstacles(8);
-			levelMessage();
-			break;
-		case 8:	
-			bg = loadImage(level8_bg); 
-			setupObstacles(9);
-			levelMessage();
-			break;
-		case 9:	
-			bg = loadImage(level9_bg); 
-			setupObstacles(10);
-			levelMessage();
-			break;
-		case 10:
-			bg = loadImage(level10_bg);
-			setupObstacles(11);
-			levelMessage();
-			break;
-		case 11:
-			bg = loadImage(level1_bg);
-			setupObstacles(2);
-			levelMessage();
-			break;
+	if (current_level == 11) {
+		setupObstacles(2);
 	}
-	
+	else {
+		setupObstacles(current_level+1);
+	}
+
+	levelMessage();
 	level_ready = false;
 }
 
@@ -355,10 +282,7 @@ void startLevelTimer() {
 	level_timeout = setTimeout(afterLevelStartTimer,level_start_time*1000);
 }
 	
-void afterLevelStartTimer() {
-	// Re-size to Fit Game Window
-	bg.resize(canv_w,canv_h);		
-	
+void afterLevelStartTimer() {		
 	// Initialize Power-Up
 	pu1 = new PowerUp(canv_w,canv_h);	
 	
@@ -423,6 +347,9 @@ void mouseMoved() {
 }
 
 void keyPressed() {
+	// Cheat codes for debugging :p
+	// Note that they do not stop the level timers
+	// and weird things will happen... so don't cheat!
 	switch (key) {
 		case '1': startLevel(1); break;
 		case '2': startLevel(2); break;
