@@ -1,0 +1,35 @@
+<!-- 
+Author: Nikhil Saxena
+Date: May 5, 2013
+-->
+
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8"/>
+	<title>DropBlox</title>
+	<!-- jQuery -->
+	<script type="text/javascript" src="code/jquery-1.9.1.min.js"></script>
+	<!-- Processing.js -->
+	<script src="code/processing-1.4.1.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="code/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="code/bootstrap.min.css">
+	<!-- Bootbox -->
+	<script src="code/bootbox.min.js"></script>	
+</head>
+<style>
+	#wrapper {
+		margin: auto;
+		width: 700px;
+		height: 640px;
+	}
+
+	.modal-body {
+		text-align: center;
+	}
+</style>
+<body>
+	<div id="wrapper">
+		<canvas id="game_canvas" data-processing-sources="code/game_code.pde"></canvas>	
+	</div>
+</body>
