@@ -537,7 +537,7 @@ class PowerUp {
 		}
 		else if (effect == 5) {
 			// Extra Life
-			r = (millis()*5) % 255;;
+			r = (millis()*5) % 255;
 			g = r;
 			b = r;
 		}
