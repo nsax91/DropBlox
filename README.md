@@ -9,7 +9,9 @@ DropBlox is a fun and addicting in-browser game built using [Processing.js](http
 
 When you first start the game, you'll be greeted by the following welcome screen:
 
-<img src="img/welcome_screen.jpg" title="DropBlox Welcome Screen"/>
+<p align="center">
+  <img src="img/welcome_screen.jpg" title="DropBlox Welcome Screen"/>
+</p>
 
 As the prompt says, you avoid the falling blocks by moving your mouse. There are ten levels, and you advance to the next level by surviving for fifteen seconds. There are also power-ups, which move horizontally across the screen. There are five types of powers you can get with power-ups:
 
@@ -27,15 +29,21 @@ We'll help you out even more too; you'll get an additional life every time you a
 
 Here's what the game looks like. You'll be controlling the red dot and trying to avoid the falling blocks.
 
-<img src="img/level_three.jpg" title="DropBlox Preview Image"/>
+<p align="center">
+  <img src="img/level_three.jpg" title="DropBlox Preview Image"/>
+</p>
 
 Not too hard, huh? Let's turn up the difficulty.
 
-<img src="img/level_five.jpg" title="DropBlox Preview Image"/>
+<p align="center">
+  <img src="img/level_five.jpg" title="DropBlox Preview Image"/>
+</p>
 
 Still not impressed?
 
-<img src="img/final_level.jpg" title="DropBlox Preview Image"/>
+<p align="center">
+  <img src="img/final_level.jpg" title="DropBlox Preview Image"/>
+</p>
 
 Good luck!
 
